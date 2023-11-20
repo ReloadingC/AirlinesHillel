@@ -35,11 +35,11 @@ public class UserServiceImpl implements UserService {
     public User update(Long userId, User incomingUser) {
         User user = getById(userId);
 
-        if(incomingUser.getTicketName() != null){
-            user.setTicketName(incomingUser.getTicketName());
+        if(incomingUser.getUsername() != null){
+            user.setUsername(incomingUser.getUsername());
         }
-        if(incomingUser.getTicketType() != null){
-            user.setTicketType(incomingUser.getTicketType());
+        if(incomingUser.getPassword() != null){
+            user.setPassword(incomingUser.getPassword());
         }
 
         return userRepository.save(user);
