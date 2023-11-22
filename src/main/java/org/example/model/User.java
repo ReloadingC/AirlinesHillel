@@ -22,19 +22,25 @@ public class User {
     @Column(nullable = false, unique = true)
     private String password;
 
-    public String getUsername() {
-        return username;
+    @Column(nullable = false, unique = true)
+    private String ticketName;
+
+    @Column(nullable = false)
+    private String ticketType;
+
+    public String getTicketName() {
+        return ticketName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setTicketName(String ticketName) {
+        this.ticketName = ticketName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getTicketType() {
+        return ticketType;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setTicketType(String ticketType) {
+        this.ticketType = ticketType;
     }
 }
