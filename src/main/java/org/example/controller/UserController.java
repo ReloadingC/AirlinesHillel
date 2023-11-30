@@ -1,7 +1,9 @@
 package org.example.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.example.model.User;
 import org.example.service.UserService;
+import org.example.transport.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,29 +18,30 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController  {
 
-        @Autowired
-        private UserService userService;
+
+        private final UserService userService;
 
         @PostMapping("/create")
-        public void create(@RequestBody User user) {
+        public void create(@RequestBody UserDto user) {
             userService.create(user);
         }
 
         @GetMapping("/get/{userId}")
-        public User getById(@PathVariable Long userId) {
+        public UserDto getById(@PathVariable Long userId) {
             return userService.getById(userId);
         }
 
         @GetMapping("/get")
-        public List<User> getAll() {
+        public List<UserDto> getAll() {
             return userService.getAll();
         }
 
         @PutMapping("/update/{userId}")
-        public User update(@PathVariable Long userId, @RequestBody User user) {
-            return userService.update(userId, user);
+        public void update(@PathVariable Long userId, @RequestBody UserDto user) {
+            userService.update(userId, user);
         }
 
         @DeleteMapping("/delete/{userId}")

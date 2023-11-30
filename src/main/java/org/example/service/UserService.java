@@ -1,17 +1,18 @@
 package org.example.service;
 
 import org.example.model.User;
+import org.example.transport.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
-    void create(User user);
+    void create(UserDto dto);
 
-    User getById(Long userId);
+    UserDto getById(Long userId);
 
-    List<User> getAll();
+    List<UserDto> getAll();
 
-    User update(Long userId, User user);
+    void update(Long userId, UserDto dto);
 
     void delete(Long userId);
 }

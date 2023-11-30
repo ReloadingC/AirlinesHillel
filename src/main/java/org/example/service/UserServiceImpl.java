@@ -1,8 +1,10 @@
 package org.example.service;
 
+import lombok.RequiredArgsConstructor;
 import org.example.model.User;
 import org.example.repository.UserRepository;
-import org.example.service.UserService;
+import org.example.transport.dto.UserDto;
+import org.example.transport.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,50 +12,42 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserMapper userMapper;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void create(User user) {
+    public void create(UserDto dto) {
+        User user = userMapper.toEntity(dto);
         userRepository.save(user);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User getById(Long userId) {
-        return userRepository.getUserById(userId);
+    public UserDto getById(Long userId) {
+        User user = userRepository.getUserById(userId);
+        return userMapper.toDto(user);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<UserDto> getAll() {
+        return userRepository.findAll().stream()
+                .map(userMapper::toDto)
+                .toList();
+
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public User update(Long userId, User incomingUser) {
-        User user = getById(userId);
-
-        if(incomingUser.getTicketName() != null){
-            user.setTicketName(incomingUser.getTicketName());
-        }
-        if(incomingUser.getTicketType() != null){
-            user.setTicketType(incomingUser.getTicketType());
-        }
-
-        return userRepository.save(user);
+    public void update(Long userId, UserDto incomingUser) {
+        User user = userRepository.getUserById(userId);
+        userMapper.update(incomingUser, user);
     }
 
     @Override
     public void delete(Long userId) {
-        User user = getById(userId);
-        userRepository.delete(user);
+        userRepository.deleteById(userId);
     }
 }
