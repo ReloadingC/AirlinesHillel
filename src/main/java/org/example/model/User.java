@@ -31,10 +31,5 @@ public class User {
     @Column(nullable = false, unique = true)
     private String password;
 
-    @Column(nullable = false, unique = true)
-    private String ticketName;
-
-    @Column(nullable = false)
-    private String ticketType;
 
 }
