@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Maxim Krishtopa
+      changes:
+        - loadData:
+            file: ../inputData/users.csv
+            tableName: users
+            relativeToChangelogFile: true
+
+
+

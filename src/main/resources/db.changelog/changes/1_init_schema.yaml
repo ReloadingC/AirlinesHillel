@@ -1,0 +1,135 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Maxim Krishtopa
+      changes:
+        - createSequence:
+            sequenceName: users_id_seq
+            startValue: 1
+            incrementBy: 1
+            minValue: 1
+
+        - createSequence:
+            sequenceName: tickets_id_seq
+            startValue: 1
+            incrementBy: 1
+            minValue: 1
+
+        - createSequence:
+            sequenceName: sessions_id_seq
+            startValue: 1
+            incrementBy: 1
+            minValue: 1
+
+        - createSequence:
+            sequenceName: flights_id_seq
+            startValue: 1
+            incrementBy: 1
+            minValue: 1
+
+        - createSequence:
+            sequenceName: airports_id_seq
+            startValue: 1
+            incrementBy: 1
+            minValue: 1
+
+        - createTable:
+            schemaName: public
+            tableName: airports
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueComputed: nextval('airports_id_seq'::regclass)
+                  constraints:
+                    primaryKey: true
+
+        - createTable:
+            schemaName: public
+            tableName: flights
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueComputed: nextval('flights_id_seq'::regclass)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+
+        - createTable:
+            schemaName: public
+            tableName: users
+            columns:
+              - column :
+                  name: id
+                  type: bigint
+                  defaultValueComputed: nextval('users_id_seq'::regclass)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+
+        - createTable:
+            schemaName: public
+            tableName: tickets
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueComputed: nextval('tickets_id_seq'::regclass)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: flight_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: flight_id_fk
+                    references: tickets(id)
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: user_id_fk
+                    references: users(id)
+
+
+        - createTable:
+            schemaName: public
+            tableName: sessions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueComputed: nextval('sessions_id_seq'::regclass)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: flight_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: flight_id_fk
+                    references: flights(id)
+              - column:
+                  name: airport_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: airport_id_fk
+                    references: airports(id)
+
+
+
