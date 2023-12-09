@@ -17,8 +17,6 @@ public class Session {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private LocalDateTime startData;
-
     @OneToOne
     @JoinColumn(name = "airport_id")
     private AirPort airPort;
