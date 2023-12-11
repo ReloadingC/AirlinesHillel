@@ -40,7 +40,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: bigint
-                  defaultValueComputed: nextval('airports_id_seq'::regclass)
+                  defaultValueComputed: nextval('airports_id_seq')
                   constraints:
                     primaryKey: true
 
@@ -51,7 +51,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: bigint
-                  defaultValueComputed: nextval('flights_id_seq'::regclass)
+                  defaultValueComputed: nextval('flights_id_seq')
                   constraints:
                     primaryKey: true
               - column:
@@ -67,7 +67,7 @@ databaseChangeLog:
               - column :
                   name: id
                   type: bigint
-                  defaultValueComputed: nextval('users_id_seq'::regclass)
+                  defaultValueComputed: nextval('users_id_seq')
                   constraints:
                     primaryKey: true
               - column:
@@ -91,7 +91,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: bigint
-                  defaultValueComputed: nextval('tickets_id_seq'::regclass)
+                  defaultValueComputed: nextval('tickets_id_seq')
                   constraints:
                     primaryKey: true
               - column:
@@ -115,7 +115,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: bigint
-                  defaultValueComputed: nextval('sessions_id_seq'::regclass)
+                  defaultValueComputed: nextval('sessions_id_seq')
                   constraints:
                     primaryKey: true
               - column:
