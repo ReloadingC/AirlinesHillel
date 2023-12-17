@@ -17,4 +17,12 @@ spring:
       ddl-auto: validate
     show-sql: true
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8180/realms/AirlinesHillel/protocol/openid-connect/certs
+
+
+
 
