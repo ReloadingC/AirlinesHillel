@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class UserController  {
         public UserDto getById(@PathVariable Long userId) {
             return userService.getById(userId);
         }
-
-        @GetMapping("/get")
+        @PreAuthorize("hasRole('MANAGER')")
+        @GetMapping("/sorted")
         public List<UserDto> getAll() {
             return userService.getAll();
         }
